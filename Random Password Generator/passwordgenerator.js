@@ -10,6 +10,6 @@ length.addEventListener('input',()=>{
     rangeValue.textContent=length.value;
 });
 
-function isSelected(option) {
-    option.
-}
+// function isSelected(option) {
+//     option.
+// }
