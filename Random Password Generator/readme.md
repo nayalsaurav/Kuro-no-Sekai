@@ -1,4 +1,3 @@
-For your Random Password Generator project within the **Kuro-no-Sekai** repository on GitHub, here’s an updated version of the `README.md` that you can use. I have customized it to reference the specific repository and provide relevant details for the Random Password Generator project.
 
 ---
 
@@ -37,7 +36,7 @@ This is a simple yet powerful **Random Password Generator** tool built as part o
 
 2. Navigate to the `random-password-generator` folder (or relevant directory containing the files).
 
-3. Open the `index.html` file in a web browser to view and use the password generator.
+3. Open the `index.html` file in a web browser to view and select the random password generator project.
 
 ### Usage
 
@@ -51,14 +50,10 @@ This is a simple yet powerful **Random Password Generator** tool built as part o
 ## Screenshots
 
 Here’s a screenshot of the Random Password Generator interface:
-![Random Password Generator](assets/randomPassword.png)
-![Random Password Generator](assets/randomPassword2.png)
 
+![Random Password Generator](assets/randomPassword.PNG)
+![Random Password Generator](assets/randomPasword2.PNG)
 
-
-### Example:
-- Screenshot of the UI
-- How the password generator works when options are checked/unchecked
 
 ## Code Snippet
 
