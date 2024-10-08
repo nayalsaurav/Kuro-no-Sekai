@@ -20,7 +20,7 @@ generatebtn.addEventListener('click', () => {
 
 let uppercaseString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let lowercaseString = "abcdefghijklmnopqrstuvwxyz";
-let specialCharString = "~!@#$%^&*";
+let specialCharString = "~!@#$%^&*()_-=,./";
 let numberString = "0123456789";
 
 function generatePassword() {
