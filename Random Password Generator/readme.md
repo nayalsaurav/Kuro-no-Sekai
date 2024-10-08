@@ -51,7 +51,6 @@ This is a simple yet powerful **Random Password Generator** tool built as part o
 
 Here’s a screenshot of the Random Password Generator interface:
 
-![Random Password Generator](assets/randomPassword.PNG)
 ![Random Password Generator](assets/randomPasword2.PNG)
 
 
