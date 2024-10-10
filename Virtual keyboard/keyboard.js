@@ -13,7 +13,6 @@ function bootup() {
     textArea.innerText = storedText;
     }
 }
-
 bootup();
 // caps lock
 function tocaps() {
