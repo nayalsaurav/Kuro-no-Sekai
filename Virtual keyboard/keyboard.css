@@ -99,9 +99,11 @@
 }
 
 .underline {
-    text-decoration: underline;
+    text-decoration: none;
 }
-
+.caps{
+    text-decoration:underline;
+}
 .lable {
     color: white;
 }
