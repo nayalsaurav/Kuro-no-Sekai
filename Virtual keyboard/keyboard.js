@@ -6,6 +6,16 @@ let textArea = document.querySelector("#text-area");
 let isCaps = true;
 let displaybtn = document.querySelector('.display');
 let keyboard = document.querySelector('.keyboard')
+
+const storedText = localStorage.getItem('userText');
+function bootup() {
+  if (storedText) {
+    textArea.innerText = storedText;
+    }
+}
+
+bootup();
+// caps lock
 function tocaps() {
   keys.forEach((key) => {
     let text = key.textContent;
@@ -19,11 +29,14 @@ function tocaps() {
   });
 }
 
-displaybtn.addEventListener('click',()=>{
-    keyboard.classList.toggle('active');
-    displaybtn.classList.toggle('active2');
+//virtual keyboard on/off
+
+displaybtn.addEventListener('click', () => {
+  keyboard.classList.toggle('active');
+  displaybtn.classList.toggle('active2');
 })
 
+// typing
 keys.forEach((key) => {
   key.addEventListener("click", () => {
     let text = key.textContent;
@@ -45,5 +58,6 @@ keys.forEach((key) => {
     } else {
       textArea.innerHTML += text;
     }
+    localStorage.setItem('userText', textArea.innerText);
   });
 });
