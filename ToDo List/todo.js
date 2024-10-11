@@ -9,7 +9,6 @@ addTaskInfo.addEventListener('click', () => {
     taskWindow.classList.toggle('active');
 });
 
-
 addBtn.addEventListener('click', () => {
     let title = taskInputTitle.value.trim();
     let description = taskInputDescription.value.trim();
@@ -89,3 +88,5 @@ function taskCompleted(taskItem) {
             title.classList.toggle('line-through');
        })
 }
+
+// local storage
