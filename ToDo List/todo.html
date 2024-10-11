@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="todo.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <div class="todo-app">
+        <div class="header">
+          <h1>ToDo App</h1>
+          <p>Complete Quests, Unlock Success!</p>
+        </div>
+
+        <div class="main-feature">
+            <div>
+              <h2>Todays's Task</h2>
+            <span class="date">Wednesday , 11 May</span>
+            </div>
+            <button class="new-task-window-btn">+ New Task</button>
+          </div>
+        
+        
+
+
+        <div class="window" style="display: none;">
+         <div class="input-area">
+          <label for="content-heading">Title</label>
+          <input type="text" placeholder="Enter heading" class="content-heading">
+         </div>
+         <div class="input-area">
+           <label for="content-description">Description</label>
+           <input type="text" placeholder="Enter short Description" id="content-description">
+         </div>
+         <div class="input-area">
+           <label for="start-time">Start Time</label>
+           <input type="time" name="" id="start-time">
+         </div>
+         <div class="input-area">
+           <label for="end-time">End Time</label>
+           <input type="time" name="" id="end-time">
+         </div>
+
+          <button id="add-task-button">Add Task</button>
+        </div>
+
+
+        <div class="task-list-box">
+
+          <ul id="task-lists">
+            
+            <li>
+              <div class="upper-part">
+                <div>
+                  <h3>Client Review & Feedback</h3>
+                  <p>Crypto Wallet Redesign</p>
+                </div>
+                <div>
+                  <span class="material-symbols-outlined">check_circle</span>
+                </div>
+              </div>
+
+              <div class="line"></div>
+
+              <div class="lower-part">
+                <div class="time">
+                  10:00PM - 11:45PM
+                </div>
+              </div>
+              
+            </li>
+
+          </ul>
+        </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+    <script src="todo.js"></script>
+  </body>
+</html>
+
