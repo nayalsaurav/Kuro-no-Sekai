@@ -1,55 +1,84 @@
+let addTaskInfo = document.querySelector('.new-task-window-btn');
+let taskWindow = document.querySelector('.window');
 let addBtn = document.querySelector("#add-task-button");
-let taskInput = document.querySelector("#task-input");
-let taskList = document.querySelector("#task-lists");
+let taskInputTitle = document.querySelector('.content-heading');
+let taskInputDescription = document.getElementById('content-description');
+let taskList = document.getElementById('task-lists');
 
-addBtn.addEventListener('click',()=>{
-    let data = taskInput.value;
-    createData(data);
-    taskInput.value = "";
-})
+addTaskInfo.addEventListener('click', () => {
+    taskWindow.classList.toggle('active');
+});
 
 
-function createData(data) {
-    let newTask = document.createElement('li');
-    data = data.trim();
-    if(data!==""){
-        newTask.innerHTML = `
-        <li class="task">
-              <div class="flex">
-                <input type="checkbox" name="task" class="check" />
-                <span class="task-content">${data}</span>
-              </div>
-              <div class="flex">
-                <span class="material-symbols-outlined edit-button btn"> edit_square </span>
-                <span class="material-symbols-outlined delete-button btn"> delete </span>
-              </div>
-            </li>
-            `;
-            taskInput.value = "";
-            taskList.appendChild(newTask);
-            updateData(newTask);
-            deleteData(newTask);
+addBtn.addEventListener('click', () => {
+    let title = taskInputTitle.value.trim();
+    let description = taskInputDescription.value.trim();
+
+    if (title && description) {
+        createData(title, description);
+        taskInputTitle.value = "";
+        taskInputDescription.value = "";
+        taskWindow.classList.remove('active');
+    } else {
+        alert("Please enter both title and description.");
     }
-}
+});
 
-function readData(data) {
-    
+// Create
+function createData(title, description) {
+  let newTask = document.createElement('li');
+  newTask.innerHTML = `
+      <div class="upper-part">
+          <div>
+              <h3 class="task-title">${title}</h3>
+              <p class="task-description">${description}</p>
+          </div>
+          <div>
+              <i class="fa-regular fa-circle-check"></i>
+          </div>
+      </div>
+      <div class="line"></div>
+      <div class="lower-part">
+          <div class="edit">
+              <span class="material-symbols-outlined edit-button btn"> edit_square </span>
+          </div>
+          <div class="time">
+              10:00 PM - 11:45 PM
+          </div>
+          <div class="delete">
+              <span class="material-symbols-outlined delete-button btn"> delete </span>
+          </div>
+      </div>
+  `;
+
+  taskList.appendChild(newTask);
+  updateData(newTask);
+  deleteData(newTask);
 }
+// Update
 function updateData(taskItem) {
   let editButton = taskItem.querySelector(".edit-button");
-  let taskContent = taskItem.querySelector(".task-content");
+  let taskTitle = taskItem.querySelector(".task-title");
+  let taskDescription = taskItem.querySelector(".task-description");
 
   editButton.addEventListener("click", () => {
-    let newTaskData = prompt("Edit your task:", taskContent.textContent);
-    if (newTaskData && newTaskData.trim() !== "") {
-      taskContent.textContent = newTaskData.trim();
-    }
+      let newTitle = prompt("Edit your task title:", taskTitle.textContent);
+      let newDescription = prompt("Edit your task description:", taskDescription.textContent);
+
+      if (newTitle && newTitle.trim() !== "") {
+          taskTitle.textContent = newTitle.trim();
+      }
+      if (newDescription && newDescription.trim() !== "") {
+          taskDescription.textContent = newDescription.trim();
+      }
   });
 }
-function deleteData(taskItem) {
-     let deleteButton = taskItem.querySelector(".delete-button");
 
-     deleteButton.addEventListener("click", () => {
-       taskList.removeChild(taskItem);
-     });
+// Delete
+function deleteData(taskItem) {
+    let deleteButton = taskItem.querySelector(".delete-button");
+
+    deleteButton.addEventListener("click", () => {
+        taskList.removeChild(taskItem); // Remove
+    });
 }

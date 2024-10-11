@@ -1,22 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-*{
+
+:root {
+    --primary-color: #4984FA;
+    --secondary-color: #E2EBFA;
+    --background-color: #F9F9F9;
+    --text-color: #8F8F8F;
+    --error-color: rgb(240, 60, 60);
+    --border-color: #BFBFBF;
+    --font-family: 'Roboto', sans-serif;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
-html,body{
+html, body {
     width: 100%;
     height: 100%;
+    font-family: var(--font-family);
+    background-color: #E3E4EA;
 }
 
-li{
+li {
     text-decoration: none;
     list-style: none;
 }
 
-.main{
+.main {
     overflow-x: hidden;
     overflow-y: auto;
     height: 100vh;
@@ -25,85 +37,140 @@ li{
     padding-top: 100px;
 }
 
-.todo-app{
+.todo-app {
     margin: 0 auto;
-    height: fit-content;
     width: 500px;
-    font-family: "Roboto", sans-serif;
     padding: 30px;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
     border-radius: 20px;
-    background-color: #F9F9F9;
-    box-shadow: 0px 0px 10px #E2EBFA  ;
+    background-color: var(--background-color);
+    box-shadow: 0 0 10px var(--border-color);
 }
-.flex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#task-lists{
-    display: flex;
-    flex-direction: column;
-    /* width: 500px; */
-}
-.task{
+
+.main-feature {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 40px 0;
 }
 
-.header h1, .header p{
-    text-align: center;
-}
-
-
-
-.main-feature{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-
-.new-task-window-btn{
+.new-task-window-btn,
+#add-task-button {
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
-    background-color:#E2EBFA ;
-    color: #4984FA;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-#task-lists li{
+#add-task-button:hover {
+    background-color: rgba(73, 132, 250, 0.7);
+}
+
+#task-lists {
+    display: flex;
+    flex-direction: column;
+}
+
+#task-lists li {
     background-color: #FFFFFF;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px #E2EBFA  ;
+    box-shadow: 0 0 7px rgba(134, 134, 134, 0.5);
+    margin-bottom: 20px;
+    transition: background-color 0.2s;
 }
 
-.upper-part p{
-    color: #8F8F8F;
-    margin-top: 5px;
-}
-
-.line{
-    margin: 20px auto;
-    height: 2px;
-    background-color: #BFBFBF;
-}
-.time{
-    color: #BFBFBF;
-    text-align: center;
-}
-
-.upper-part{
+.upper-part, .lower-part {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.upper-part p {
+    color: var(--text-color);
+    margin-top: 5px;
+}
+
+.line {
+    margin: 20px auto;
+    height: 2px;
+    background-color: var(--border-color);
+}
+
+.time {
+    color: var(--border-color);
+    text-align: center;
+}
+
+.checked, .edit, .delete {
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.edit {
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+
+.delete {
+    color: var(--error-color);
+    font-size: 2rem;
+}
+
+.window {
+    margin: 0 auto;
+    position: absolute;
+    background-color: var(--background-color);
+    box-shadow: 0 0 10px var(--border-color);
+    padding: 30px;
+    top: 45%;
+    border-radius: 20px;
+    display: none;
+}
+.button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.input-area input {
+    width: 400px;
+    height: 40px;
+    text-align: center;
+    margin: 10px 0 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 10px var(--border-color);
+    cursor: text;
+}
+
+.timing input {
+    width: 100%;
+}
+
+.input-area label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.active{
+    display: block;
 }

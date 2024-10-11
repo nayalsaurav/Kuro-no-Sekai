@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo List</title>
-    <link rel="stylesheet" href="todo.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="todo.css" />
   </head>
   <body>
     <div class="main">
@@ -29,52 +30,34 @@
         
 
 
-        <div class="window" style="display: none;">
+        <div class="window">
          <div class="input-area">
           <label for="content-heading">Title</label>
-          <input type="text" placeholder="Enter heading" class="content-heading">
+          <input type="text" placeholder="Enter Title" class="content-heading">
          </div>
          <div class="input-area">
            <label for="content-description">Description</label>
            <input type="text" placeholder="Enter short Description" id="content-description">
          </div>
-         <div class="input-area">
-           <label for="start-time">Start Time</label>
-           <input type="time" name="" id="start-time">
+         <div class="timing">
+          <div class="input-area">
+            <label for="start-time">Start Time</label>
+            <input type="time" name="" id="start-time">
+          </div>
+          <div class="input-area">
+            <label for="end-time">End Time</label>
+            <input type="time" name="" id="end-time">
+          </div>
          </div>
-         <div class="input-area">
-           <label for="end-time">End Time</label>
-           <input type="time" name="" id="end-time">
-         </div>
-
-          <button id="add-task-button">Add Task</button>
+          <div class="button">
+            <button id="add-task-button">Add Task</button>
+          </div>
         </div>
 
 
         <div class="task-list-box">
 
           <ul id="task-lists">
-            
-            <li>
-              <div class="upper-part">
-                <div>
-                  <h3>Client Review & Feedback</h3>
-                  <p>Crypto Wallet Redesign</p>
-                </div>
-                <div>
-                  <span class="material-symbols-outlined">check_circle</span>
-                </div>
-              </div>
-
-              <div class="line"></div>
-
-              <div class="lower-part">
-                <div class="time">
-                  10:00PM - 11:45PM
-                </div>
-              </div>
-              
-            </li>
 
           </ul>
         </div>
