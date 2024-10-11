@@ -33,31 +33,29 @@ function createData(title, description) {
               <h3 class="task-title">${title}</h3>
               <p class="task-description">${description}</p>
           </div>
-          <div>
-              <i class="fa-regular fa-circle-check"></i>
+          <div class="checked">
+              <i class="fa-regular fa-circle-check" id = "check"></i>
           </div>
       </div>
       <div class="line"></div>
       <div class="lower-part">
           <div class="edit">
-              <span class="material-symbols-outlined edit-button btn"> edit_square </span>
-          </div>
-          <div class="time">
-              10:00 PM - 11:45 PM
+              <i class="fa-solid fa-pen-to-square"></i>
           </div>
           <div class="delete">
-              <span class="material-symbols-outlined delete-button btn"> delete </span>
+              <i class="fa-solid fa-trash-can"></i>
           </div>
       </div>
   `;
 
   taskList.appendChild(newTask);
+  taskCompleted(newTask);
   updateData(newTask);
   deleteData(newTask);
 }
 // Update
 function updateData(taskItem) {
-  let editButton = taskItem.querySelector(".edit-button");
+  let editButton = taskItem.querySelector(".edit");
   let taskTitle = taskItem.querySelector(".task-title");
   let taskDescription = taskItem.querySelector(".task-description");
 
@@ -76,9 +74,18 @@ function updateData(taskItem) {
 
 // Delete
 function deleteData(taskItem) {
-    let deleteButton = taskItem.querySelector(".delete-button");
+    let deleteButton = taskItem.querySelector(".delete");
 
     deleteButton.addEventListener("click", () => {
         taskList.removeChild(taskItem); // Remove
     });
+}
+
+function taskCompleted(taskItem) {
+       let check = taskItem.querySelector("#check");
+       let title = taskItem.querySelector(".task-title");
+       check.addEventListener('click',()=>{
+            check.classList.toggle('toggle-check');
+            title.classList.toggle('line-through');
+       })
 }

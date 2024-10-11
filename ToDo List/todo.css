@@ -162,9 +162,6 @@ li {
     cursor: text;
 }
 
-.timing input {
-    width: 100%;
-}
 
 .input-area label {
     font-size: 1rem;
@@ -173,4 +170,13 @@ li {
 
 .active{
     display: block;
+}
+
+.toggle-check{
+    color:#4984FA;
+}
+
+.line-through{
+    text-decoration: line-through;
+    font-weight: bold;
 }
