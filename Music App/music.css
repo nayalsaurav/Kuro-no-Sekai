@@ -53,8 +53,8 @@ i {
 }
 .glass {
   background: rgba(255, 255, 255, 0.068);
-  -webkit-backdrop-filter: blur(50px);
-  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
   /* border: 1px solid rgba(255,255,255,0.175); */
 }
 .glass2 {
@@ -124,18 +124,24 @@ i {
 
 /* progress */
 
-.progress {
+.progress-section {
   width: 100%;
 }
-
+.progress{
+  background-color: gray;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+}
 .progress-bar {
   height: 4px;
-  background-color: palevioletred;
   border-radius: 5px;
   margin-bottom: 5px;
   position: relative;
   display: flex;
   align-items: center;
+  background-color: palevioletred;
+  width: 0;
 }
 
 .seek {
@@ -169,19 +175,21 @@ i {
 
 .music-list-section{
   position: absolute;
-  bottom: 0;
+  bottom: -100%;
   left: 0;
   right: 0;
   height: 400px;
-  /* background-color: rgb(24, 128, 219); */
   border-radius: 20px;
   padding: 20px;
   overflow-y: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    transition: all .5s ease;
 }
 
-
+.active{
+  bottom: 0;
+}
 .music-list-section::-webkit-scrollbar{
   display: none;
 }

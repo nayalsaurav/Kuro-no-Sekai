@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Music Player</title>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -23,17 +23,20 @@
           </div>
         </nav>
         <main class="about">
-          <img src="assets/images/img1.jpg" alt="" class="image" />
-          <div class="title">Alan Walker & MER Musikk - Faded</div>
-          <div class="artist">Alan Walker</div>
+          <img src="" alt="" class="image" />
+          <div class="title"></div>
+          <div class="artist"></div>
         </main>
-        <section class="progress">
-          <div class="progress-bar">
-            <div class="seek"></div>
+        <section class="progress-section">
+          <audio src="" id="music"></audio>
+          <div class="progress">
+            <div class="progress-bar">
+              <!-- <div class="seek"></div> -->
+            </div>
           </div>
           <div class="timings">
-            <div class="start">0:00</div>
-            <div class="end">3:08</div>
+            <div class="start"></div>
+            <div class="end"></div>
           </div>
         </section>
         <section class="controls">
@@ -41,26 +44,26 @@
             <i class="material-icons">repeat</i>
           </div>
           <div>
-            <i class="material-icons">skip_previous</i>
+            <i class="material-icons" id="previous">skip_previous</i>
           </div>
           <div>
-            <i class="material-icons">play_arrow</i>
+            <i class="material-icons" id="playPause">play_arrow</i>
           </div>
           <div>
-            <i class="material-icons">skip_next</i>
+            <i class="material-icons" id="next">skip_next</i>
           </div>
           <div>
-            <i class="material-icons">queue_music</i>
+            <i class="material-icons" id="queue">queue_music</i>
           </div>
         </section>
         <section class="music-list-section glass2">
           <div class="music-list-topbar">
             <div class="music-list-title">
-              <i class="material-icons">queue_music</i>
+              <i class="material-icons" >queue_music</i>
               <span>Music List</span>
             </div>
             <div>
-              <i class="material-icons">close</i>
+              <i class="material-icons" id="close">close</i>
             </div>
           </div>
           <div class="music-list">
@@ -118,6 +121,7 @@
         </section>
       </div>
     </div>
-    <script src="music.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/AllMusicList.js"></script>
   </body>
 </html>
