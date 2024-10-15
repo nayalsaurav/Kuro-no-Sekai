@@ -4,6 +4,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 *::selection{
   user-select: none;
@@ -175,23 +176,25 @@ i {
   /* background-color: rgb(24, 128, 219); */
   border-radius: 20px;
   padding: 20px;
-
-}
-
-.music-list{
-    overflow-y: auto;
+  overflow-y: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.music-list::-webkit-scrollbar{
+
+.music-list-section::-webkit-scrollbar{
   display: none;
 }
 
 .music-list-topbar{
+  position: sticky;
+  top: 1px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #363264;
+  height: 40px;
+  padding-block: 30px;
 }
 
 .music-list-title{
