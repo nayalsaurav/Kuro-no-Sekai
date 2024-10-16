@@ -2,7 +2,6 @@ const musicPlayer = document.querySelector('.music-player');
 const queue = document.querySelector('#queue');
 const closeBtn = document.querySelector('#close');
 const musicListArea = document.querySelector('.music-list-section');
-
 const image = document.querySelector('.image');
 const title = document.querySelector('.title');
 const artist = document.querySelector('.artist');
@@ -10,91 +9,107 @@ const music = document.querySelector('#music');
 const playPauseBtn = document.querySelector('#playPause');
 const previous = document.querySelector('#previous');
 const next = document.querySelector('#next');
-
 const progress = document.querySelector(".progress");
 const progressBar = document.querySelector(".progress-bar");
+const musicList = document.querySelector('.ul-list');
 
 let index = 0;
-window.addEventListener('load',()=>{
+
+window.addEventListener('load', () => {
     loadMusic(index);
+    loadMusicList();
+    music.addEventListener('loadeddata', updateDuration);
 });
+
 function loadMusic(index) {
-    title.innerHTML = allMusic[index].title;
-    artist.innerHTML=allMusic[index].artist;
-    image.src = `assets/images/${allMusic[index].image}`;
-    music.src = `assets/music/${allMusic[index].src}`;
+    const currentMusic = allMusic[index];
+    title.textContent = currentMusic.title;
+    artist.textContent = currentMusic.artist;
+    image.src = `assets/images/${currentMusic.image}`;
+    music.src = `assets/music/${currentMusic.src}`;
 }
 
-playPauseBtn.addEventListener('click',()=>{
-    let isPaused = musicPlayer.classList.contains('paused');
-    if(isPaused) pauseAudio();
-    else playAudio(); 
-})
+function loadMusicList() {
+    allMusic.forEach(musicItem => {
+        const container = document.createElement('div');
 
-function playAudio() {
-    playPauseBtn.innerHTML="pause";
-    musicPlayer.classList.add('paused');
-    music.play();
-}
-function pauseAudio() {
-    playPauseBtn.innerHTML="play_arrow";
-    musicPlayer.classList.remove('paused');
-    music.pause();
-}
-
-previous.addEventListener('click',()=>{
-    index--;
-    if(index<0) index = allMusic.length -1;
-    // console.log(allMusic[index]);
-    loadMusic(index);
-    playAudio();
-});
-next.addEventListener('click',()=>{
-    index++;
-    if(index>=allMusic.length) index = 0;
-    // console.log(allMusic[index]);
-    loadMusic(index);
-    playAudio();
-});
-
-
-music.addEventListener('timeupdate',(e)=>{
-    console.log(e);
-    let currentTime = e.target.currentTime;
-    let duration = e.target.duration;
-    let progressWidth = (currentTime/duration)*100;
-    progressBar.style.width = `${progressWidth}%`;
-    let start = document.querySelector('.start');
-    music.addEventListener('loadeddata',()=>{
-        let end = document.querySelector('.end');
-        let dur = music.duration;
-        let min =Math.floor(dur/60);
-        let sec = Math.floor(dur%60);
-        sec = (sec<10)?`0${sec}`:sec;
-        end.innerHTML = `${min} : ${sec}`;    
+        const li = document.createElement('li');
+        li.classList.add('music-info');
+        li.innerHTML = `
+            <div class="music-desc">
+                <div class="title">${musicItem.title}</div>
+                <div class="artist">${musicItem.artist}</div>
+            </div>
+            <div class="status">Loading...</div> <!-- Initial loading status -->
+        `;
+        const audioTag = document.createElement('audio');
+        audioTag.src = `assets/music/${musicItem.src}`;
+        audioTag.addEventListener('loadedmetadata', () => {
+            const duration = formatTime(audioTag.duration);
+            li.querySelector('.status').textContent = duration;
+        });
+        container.appendChild(li);
+        container.appendChild(document.createElement('hr'));
+        musicList.appendChild(container);
     });
-    let curr = currentTime;
-    let currMin =Math.floor(curr/60);
-    let currSec = Math.floor(curr%60);
-    currSec = (currSec<10)?`0${currSec}`:currSec;
-    start.innerHTML = `${currMin} : ${currSec}`;
+}
 
+let list = document.querySelectorAll('li');
+list.forEach(item => {
+    if(item.title==)
 });
 
-progress.addEventListener('click',(e)=>{
-    let progressWidth = progress.clientWidth;
-    let offsetX = e.offsetX;
-    let duration = music.duration;
-    music.currentTime = (offsetX/progressWidth)*duration;
-    playAudio();
+
+
+playPauseBtn.addEventListener('click', togglePlayPause);
+
+function togglePlayPause() {
+    if (musicPlayer.classList.toggle('paused')) {
+        music.play();
+        playPauseBtn.textContent = "pause";
+    } else {
+        music.pause();
+        playPauseBtn.textContent = "play_arrow";
+    }
+}
+
+previous.addEventListener('click', () => changeTrack(-1));
+next.addEventListener('click', () => changeTrack(1));
+
+function changeTrack(direction) {
+    index = (index + direction + allMusic.length) % allMusic.length;
+    loadMusic(index);
+    music.play();
+    playPauseBtn.textContent = "pause"; // Update button to show pause
+}
+
+music.addEventListener('timeupdate', () => {
+    const currentTime = music.currentTime;
+    const duration = music.duration;
+    progressBar.style.width = `${(currentTime / duration) * 100}%`;
+    updateCurrentTime(currentTime);
 });
 
-queue.addEventListener('click',()=>{
-    musicListArea.classList.add('active'); 
-    console.log(queue);
-});
-closeBtn.addEventListener('click',()=>{
-    musicListArea.classList.remove('active'); 
-    console.log(closeBtn);
+function updateDuration() {
+    document.querySelector('.end').textContent = formatTime(music.duration);
+}
+
+function updateCurrentTime(currentTime) {
+    document.querySelector('.start').textContent = formatTime(currentTime);
+}
+
+function formatTime(seconds) {
+    const min = Math.floor(seconds / 60);
+    const sec = String(Math.floor(seconds % 60)).padStart(2, '0');
+    return `${min}:${sec}`;
+}
+
+progress.addEventListener('click', (e) => {
+    const duration = music.duration;
+    music.currentTime = (e.offsetX / progress.clientWidth) * duration;
+    music.play();
+    playPauseBtn.textContent = "pause"; // Update button to show pause
 });
 
+queue.addEventListener('click', () => musicListArea.classList.add('active'));
+closeBtn.addEventListener('click', () => musicListArea.classList.remove('active'));
