@@ -13,45 +13,86 @@ const temperature = document.querySelector(".temperature");
 const wind = document.querySelector("[data-wind-speed]");
 const humidity = document.querySelector("[data-humidity]");
 const cloud = document.querySelector("[data-cloud]");
+const error404 = document.querySelector(".error");
+const grantAccessBtn = document.querySelector("[data-grant-access-btn]");
+
+grantAccessBtn.addEventListener('click', () => {
+  if (!checkLocation()) {
+    getLocation();
+  } else {
+    console.log('Location data already stored.');
+  }
+});
+
+function checkLocation() {
+  let storedData = sessionStorage.getItem('cords');
+  
+  if (storedData) {
+    let coordinates = JSON.parse(storedData);
+    grantLocationArea.style.display = "none";
+    fetchWeatherUsingGeolocation(coordinates.x, coordinates.y);
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 // tab switching
 searchLocationBtn.addEventListener("click", () => {
   searchLocationBtn.classList.add("button-active");
   yourLocationBtn.classList.remove("button-active");
   weatherInfoArea.style.display = "none";
+  grantLocationArea.style.display = "none";
   searchArea.style.display = "flex";
 });
 yourLocationBtn.addEventListener("click", () => {
   yourLocationBtn.classList.add("button-active");
   searchLocationBtn.classList.remove("button-active");
-  weatherInfoArea.style.display = "flex";
   searchArea.style.display = "none";
+  checkLocation();
 });
 
 // search weather using city name
 searchBtn.addEventListener("click", () => {
   const value = searchInput.value;
-  fetchWeatherUsingCity(value);
+  if(value.trim()!==""){
+    fetchWeatherUsingCity(value);
+  }
+  searchInput.value="";
 });
 
-// fetching data using city name
-async function fetchWeatherUsingCity(city) {
+async function fetchWeather(url) {
   loader.style.display = "block";
+  weatherInfoArea.style.display = "none";
   try {
-    weatherInfoArea.style.display = "none";
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-    );
+    const res = await fetch(url);
     const data = await res.json();
-    console.log("Weather Data using city name \n", data);
-    renderData(data);
+    if (data?.cod === "404") {
+      cityNotFound();
+    } else {
+      error404.style.display = "none";
+      renderData(data);
+      weatherInfoArea.style.display = "flex";
+    }
   } catch (e) {
-    console.log("Error Fetching Data!!", e);
+    console.error("Error Fetching Data:", e);
   } finally {
     loader.style.display = "none";
-    weatherInfoArea.style.display = "flex";
   }
 }
+
+
+async function fetchWeatherUsingCity(city) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  await fetchWeather(url);
+}
+
+async function fetchWeatherUsingGeolocation(lat, lon) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  await fetchWeather(url);
+}
+
 
 // rendering data on the document
 function renderData(data) {
@@ -63,36 +104,27 @@ function renderData(data) {
   cloud.textContent = `${data?.clouds?.all}%`;
 }
 
-// fetching data using Geolocation
-async function fetchWeatherUsingGeolocation(lat,lon) {
-  loader.style.display = "block";
-  try {
-    weatherInfoArea.style.display = "none";
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
-    );
-    const data = await res.json();
-    console.log("Weather Data using geolocation \n", data);
-    renderData(data);
-  } catch (e) {
-    console.log("Error Fetching Data!!", e);
-  } finally {
-    loader.style.display = "none";
-    weatherInfoArea.style.display = "flex";
-  }
-}
-
 //getting geo location
 function getLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
+    navigator.geolocation.getCurrentPosition((position) => {
+      const coords = {
+        x: position.coords.latitude,
+        y: position.coords.longitude
+      };
+      sessionStorage.setItem('cords', JSON.stringify(coords));
+      grantLocationArea.style.display = "none";
+      fetchWeatherUsingGeolocation(coords.x, coords.y);
+    }, (error) => {
+      console.error('Error getting location:', error);
+    });
   } else {
-    console.log("Geolocation is not supported by this browser.");
+    console.error('Geolocation is not supported by this browser.');
   }
 }
 
-function showPosition(position) {
-  lon = position.coords.longitude;
-  lat = position.coords.latitude;
-}
 
+function cityNotFound() {
+  weatherInfoArea.style.display="none";
+  error404.style.display = "flex";
+}
