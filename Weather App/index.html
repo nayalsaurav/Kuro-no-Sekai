@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <main>
+        <h1 class="title">Weather App</h1>
+        <div class="button-group">
+          <button class="btn btn-primary button-active">
+            Your Location
+          </button>
+          <button class="btn btn-secondary">Search Weather</button>
+        </div>
+        <section class="search-section">
+          <input type="text" placeholder="Search for city ..." class="glass-effect" data-search-input=""/>
+            <span class="material-symbols-outlined glass-effect" data-search-btn=""> search </span>
+        </section>
+        <div class="loader">
+          <img src="assets/loading.gif" alt="" srcset="" width="175">
+        </div>
+        <section class="weather-info">
+           <div class="loding-section">
+        </div>
+          <h2 class="city"></h2>
+          <p class="condition"></p>
+          <p class="temperature"></p>
+          <div class="weather-stats">
+            <div class="stat glass-effect">
+                <img src="assets/wind.png" alt="" width="55px">
+              <p class="stat-title">Wind Speed</p>
+              <p class="stat-value"data-wind-speed></p>
+            </div>
+            <div class="stat glass-effect">
+                <img src="assets/humidity.png" alt="" width="55px">
+              <p class="stat-title">Humidity</p>
+              <p class="stat-value" data-humidity></p>
+            </div>
+            <div class="stat glass-effect">
+                <img src="assets/cloud.png" alt="" width="55px">
+              <p class="stat-title">Cloud Cover</p>
+              <p class="stat-value" data-cloud=""></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="grant-location-section">
+            <img src="assets/placeholder.png" alt="" width="150">
+            <h2>Grant Location Access</h2>
+            <p>Allow Access To Get Weather Information</p>
+            <button class="btn glass-effect">
+                GRANT ACCESS
+            </button>
+        </section>
+       
+      </main>
+    </div>
+
+    <!-- <script type="module" src="script.js"></script> -->
+     <script src="script.js"></script>
+  </body>
+</html>
