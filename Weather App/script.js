@@ -24,7 +24,7 @@ grantAccessBtn.addEventListener('click', () => {
     console.log('Location data already stored.');
   }
 });
-
+checkLocation();
 function checkLocation() {
   let storedData = sessionStorage.getItem('cords');
   
