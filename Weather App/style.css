@@ -31,12 +31,9 @@ body {
     var(--colorDark1) 0%,
     var(--colorDark2) 100%
   );
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow-x: hidden;
   overflow-y: auto;
-  height: 100vh;
+  height:100vh;
 }
 
 main {
@@ -44,8 +41,8 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-block: 50px;
-  height: 100%;
+  width: 100%;
+  padding-block:60px ;
 }
 
 .title {
@@ -58,6 +55,7 @@ main {
   justify-content: space-around;
   width: 100%;
   margin-bottom: 50px;
+  gap: 5px;
 }
 
 .btn {
@@ -79,6 +77,7 @@ main {
   display: none;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 .city {
@@ -93,7 +92,7 @@ main {
 
 .temperature {
   font-size: 2.5rem;
-  margin: 40px 0;
+  margin-bottom: 30px;
 }
 
 .weather-stats {
@@ -206,6 +205,7 @@ main {
   }
   .btn {
     font-size: 0.9rem;
+    padding: 7px 15px;
   }
   .search-section input {
     width: 200px;

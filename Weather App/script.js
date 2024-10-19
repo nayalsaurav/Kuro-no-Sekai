@@ -15,6 +15,7 @@ const humidity = document.querySelector("[data-humidity]");
 const cloud = document.querySelector("[data-cloud]");
 const error404 = document.querySelector(".error");
 const grantAccessBtn = document.querySelector("[data-grant-access-btn]");
+const weatherIcon = document.querySelector("[data-weather-icon]");
 
 grantAccessBtn.addEventListener('click', () => {
   if (!checkLocation()) {
@@ -33,6 +34,8 @@ function checkLocation() {
     fetchWeatherUsingGeolocation(coordinates.x, coordinates.y);
     return true;
   } else {
+    grantLocationArea.style.display="flex";
+    weatherInfoArea.style.display="none";
     return false;
   }
 }
@@ -60,6 +63,11 @@ searchBtn.addEventListener("click", () => {
     fetchWeatherUsingCity(value);
   }
   searchInput.value="";
+});
+searchInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    searchBtn.click();
+  }
 });
 
 async function fetchWeather(url) {
@@ -96,12 +104,17 @@ async function fetchWeatherUsingGeolocation(lat, lon) {
 
 // rendering data on the document
 function renderData(data) {
-  city.textContent = `${data?.name}`;
+  city.innerHTML = `${data?.name} <img
+    src="https://flagcdn.com/144x108/${data?.sys?.country.toLowerCase()}.png"
+      width="40"
+        height="30"
+          alt="${data?.name}">`;
   condition.textContent = `${data?.weather[0]?.main}`;
   temperature.textContent = `${data?.main?.temp}°C`;
   humidity.textContent = `${data?.main?.humidity}%`;
   wind.textContent = `${data?.wind?.speed} m/s`;
   cloud.textContent = `${data?.clouds?.all}%`;
+  weatherIcon.src = `https://openweathermap.org/img/wn/${data?.weather?.[0]?.icon}@2x.png`
 }
 
 //getting geo location
